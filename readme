@@ -1,0 +1,22 @@
+1. npm install --force
+2. npm init playwright@latest
+3. run tests --> npx playwright test
+4. test.describe.skip
+5. test.describe.only
+6. timw=eouts: in tsconfig.ts: property-->timeout: 30000 (by default)
+7. globalTimeout: 60000 (by default -->No default in tsconfig.ts)
+8. in tesconfig in use property: actionTimeout: 30000; navigationTimeout: 30000
+9.  await button.click({ timeout: 16000 }); - will override tsconfig.ts timeouts
+10. test.setTimeout(30000); //set timeout for the test to 30 sec
+11. test.slow()- will increase test default timeout *3 times
+12. test.beforeEach(async ({ page }, testInfo) => {
+    await page.goto('http://uitestingplayground.com/ajax');
+    await page.getByText('Button Triggering Ajax Request').click();
+
+    testInfo.setTimeout(testInfo.timeout + 2000); //will add 2 sec to each test timeout, so if the test timeout is 30 sec, it will be 32 sec for this test
+});
+
+13. in tsconfig:
+expect:{
+    timeout: 6000 (5000 by default)
+}
