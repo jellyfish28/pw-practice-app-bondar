@@ -79,3 +79,8 @@ git commit -m 'Test message'
 go to https://playwright.dev/docs/ci-introro
 
 main workflow will be placed in .github/workflows
+
+also setup your user in git 
+
+git config --global user.name "<your-full-name>"
+git config --global user.email "<your-email-address>"
