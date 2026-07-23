@@ -66,4 +66,16 @@ instruction to setup remote repo
 
 https://bondaracademy.com/blog/most-poular-git-commands-for-testers
 
+3.1 git remote set-url origin https://github.com/jellyfish28/pw-practice-app-bondar.git - create new repo on GitHub and set it as main one
 
+3.2 git remote -v -- check that main repo is selected
+
+3.3 git add -A - to stage all files
+3.4 commit 
+git commit -m 'Test message'
+
+3.5 git push
+
+go to https://playwright.dev/docs/ci-introro
+
+main workflow will be placed in .github/workflows
