@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }, testInfo) => {
-    await page.goto('http://uitestingplayground.com/ajax');
+    await page.goto(process.env.URL || 'http://uitestingplayground.com/ajax');
     await page.getByText('Button Triggering Ajax Request').click();
 
     testInfo.setTimeout(testInfo.timeout + 2000); //will add 2 sec to each test timeout, so if the test timeout is 30 sec, it will be 32 sec for this test
@@ -51,5 +51,5 @@ test('timeouts', async ({ page }) => {
 
     const button = page.locator('.bg-success');
 
-    await button.click({ timeout: 16000 }); //click will wait up to 10 sec for the element to be attached to the DOM
+    await button.click({ timeout: 10000 }); //click will wait up to 10 sec for the element to be attached to the DOM
 })

@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
-    await page.goto('http://localhost:51003/');
+    await page.goto('/');
     await page.getByText('Forms').click();
     await page.getByText('Form Layouts').click();
 });//will be executed before each test in the file, it will navigate to the specified URL before each test runs

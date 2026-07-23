@@ -13,10 +13,38 @@
     await page.goto('http://uitestingplayground.com/ajax');
     await page.getByText('Button Triggering Ajax Request').click();
 
-    testInfo.setTimeout(testInfo.timeout + 2000); //will add 2 sec to each test timeout, so if the test timeout is 30 sec, it will be 32 sec for this test
+    testInfo.setTimeout(testInfo.timeout + 2000); //will add 2 sec to each test
+timeout, so if the test timeout is 30 sec, it will be 32 sec for this test
 });
 
 13. in tsconfig:
 expect:{
     timeout: 6000 (5000 by default)
 }
+
+14. to run specific file
+
+npx playwright test uiComponents.spec.ts --project=chromium
+
+15. to run using scripts from package.json
+
+npm run firstTest-chromium
+
+16. download via npm
+'@faker-js/faker'
+
+save also into dependencies
+
+npm i @faker-js/faker --save-dev --force
+
+17. in uiComponents
+//it has more Priority than PW config
+in test.describe (all tests in that block will be executed 2 times)
+test.describe.configure({ retries: 2 })
+
+when Retry is ON Worker#2 is created and runs Failed test again
+
+
+on PW config
+retries: process.env.CI ? 2 : 0, -->0 means 0 retries locally
+

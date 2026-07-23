@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Basic form submit', async ({ page }) => {
-    await page.goto('http://localhost:51003/');
+    await page.goto('/');
     await page.getByText('Forms').click();
     await page.getByText('Form Layouts').click();
 
