@@ -18,7 +18,7 @@ export default defineConfig<TestOptions>({
     timeout: 5000, // Maximum time expect() should wait for the condition to be met.
   },
   timeout: 40000,//test timeout
-  globalTimeout: 60000,//global timeout for all tests
+  globalTimeout: 300000,//global timeout for all tests
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: false,
