@@ -80,9 +80,13 @@ instruction to setup remote repo
 https://bondaracademy.com/blog/most-poular-git-commands-for-testers
 3.0 upload your project to GitHub
 
-3.1 git remote set-url origin https://github.com/jellyfish28/pw-practice-app-bondar.git - create new repo on GitHub and set it as main one
+3.1 git remote set-url origin https://github.com/jellyfish28/pw-practice-app-bondar.git - create new repo on GitHub and set it as main one;If you cloned the project from the remote repository but would like to switch the remote repository to the new one (for example, to your private repository), you can update the remote repository URL with this command
 
 go to https://playwright.dev/docs/ci-intro and copy playwright.yml to your project
+
+https://github.com/jellyfish28/pw-practice-app-bondar/settings/environments/23762296860/edit - add Env secrets from URL=https://playground.bondaracademy.com/pages/iot-dashboard
+USERNAME=test@gmail.com
+PASSWORD=12345
 
 3.2 git remote -v -- check that main repo is selected
 
