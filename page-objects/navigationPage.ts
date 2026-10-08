@@ -19,7 +19,7 @@ export class NavigationPage extends BaseHelper {
     }
 
     async navigateToFormsPage() {
-        this.waitForNumberOfMiliseconds(1);
+        await this.waitForNumberOfMiliseconds(1);
         await this.selectGroupMenuItem('Forms');
         await this.formLayout.click();
     }

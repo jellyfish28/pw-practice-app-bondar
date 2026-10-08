@@ -2,21 +2,23 @@ import { defineConfig, devices } from '@playwright/test';
 import type { TestOptions } from './test-options';
 
 /**
- * Read environment variables from file.
+ * Read environment variables from .env file.
  * https://github.com/motdotla/dotenv
  */
 import dotenv from 'dotenv';
 import path from 'path';
-dotenv.config({ path: path.resolve(__dirname, '.env') });
+dotenv.config({ path: path.resolve(__dirname, process.env.TEST_ENV ? `.env.${process.env.TEST_ENV}` : '.env') });
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
 export default defineConfig<TestOptions>({
   expect: {
-    toMatchSnapshot: { maxDiffPixels: 100 }
+    toMatchSnapshot: { maxDiffPixels: 100 },
+    timeout: 5000, // Maximum time expect() should wait for the condition to be met.
   },
-  timeout: 40000,
+  timeout: 40000,//test timeout
+  globalTimeout: 60000,//global timeout for all tests
   testDir: './tests',
   /* Run tests in files in parallel */
   fullyParallel: false,
@@ -35,8 +37,10 @@ export default defineConfig<TestOptions>({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
-    baseURL: 'http://localhost:4200/',
+    //baseURL: 'http://localhost:4200/',
+    baseURL: process.env.URL,
     globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
+    actionTimeout: 4000,//maximum time for each action to complete, e.g. click(), fill(), etc.
 
     //baseURL: process.env.DEV === '1' ? 'http://localhost:4200/' : process.env.STAGING === '1' ? 'http://localhost:4201/' : 'http://localhost:4200/',
 
@@ -50,25 +54,27 @@ export default defineConfig<TestOptions>({
 
   /* Configure projects for major browsers */
   projects: [
-    // {
-    //   name: 'dev',
-    //   use: {
-    //     ...devices['Desktop Chrome'],
-    //     baseURL: 'http://localhost:4200/'
-    //   },
+    {
+      name: 'dev',
+      use: {
+        ...devices['Desktop Chrome'],
+        //baseURL: 'http://localhost:4200/'
+      },
 
-    // },
-    // {
-    //   name: 'staging',
-    //   use: {
-    //     ...devices['Desktop Chrome'],
-    //     baseURL: 'http://localhost:4201/'
-    //   },
+    },
+    {
+      name: 'staging',
+      use: {
+        ...devices['Desktop Chrome'],
+        //baseURL: 'http://localhost:4201/'
+      },
 
-    // },
+    },
     {
       name: 'chromium',
       use: { ...devices['Desktop Chrome'] },
+      //timeout: 50000,
+      //retries: 1,
       //fullyParallel: true //can run tests in parallel only e.g. in  Chrome
     },
 
@@ -119,8 +125,8 @@ export default defineConfig<TestOptions>({
   ],
 
   /* Run your local dev server before starting the tests */
-  webServer: {
-    command: 'npm run start',
-    url: 'http://localhost:4200'
-  },
+  // webServer: {
+  //   command: 'npm run start',
+  //   url: 'http://localhost:4200'
+  // },
 });

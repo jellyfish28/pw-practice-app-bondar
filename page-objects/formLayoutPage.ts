@@ -1,5 +1,6 @@
 import { Page } from "@playwright/test";
 import { BaseHelper } from "./baseHelper";
+import { step } from "../helper/test-step-decorator";
 
 export class FormLayoutPage extends BaseHelper {
 
@@ -7,6 +8,7 @@ export class FormLayoutPage extends BaseHelper {
         super(page);
     }
 
+    @step
     async submitUsingGridForm(email: string, password: string, option: string) {
         const form = await this.page.locator('nb-card', { hasText: 'Using the Grid' });
         await form.getByRole('textbox', { name: 'Email' }).fill(email);
@@ -22,6 +24,7 @@ export class FormLayoutPage extends BaseHelper {
      * @param email - user email
      * @param checkbox - true/false
      */
+    @step
     async submitInlineForm(name: string, email: string, checkbox: boolean) {
         const form = await this.page.locator('nb-card', { hasText: 'Inline form' });
         await form.getByRole('textbox', { name: 'Jane Doe' }).fill(name);

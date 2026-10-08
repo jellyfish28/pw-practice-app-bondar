@@ -9,7 +9,8 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "firstTest-chromium": "npx playwright test firstTest.spec.ts --project=chromium",
+    "firstTest-chromium": "npx playwright test basicFormSubmit.spec.ts  --project=chromium",
+    "firstTest-chromium:qa": "TEST_ENV=qa npx playwright test basicFormSubmit.spec.ts --project=chromium",
     "firstTest-firefox": "npx playwright test firstTest.spec.ts --project=firefox",
     "firstTest-all-sequential": "npm run firstTest-chromium && npm run firstTest-firefox",
     "firstTest-all-parallel": "npm run firstTest-chromium & npm run firstTest-firefox",

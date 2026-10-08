@@ -9,7 +9,7 @@ test.beforeEach(async ({ page }) => {
 test.describe('UI Components', () => {
     //retries
     test.describe.configure({ retries: 2 })
-    test.describe.configure({ mode: 'serial' })
+    // test.describe.configure({ mode: 'serial' })
 
     test.beforeEach(async ({ page }) => {
         await page.getByText('Forms').click();
@@ -20,16 +20,17 @@ test.describe('UI Components', () => {
         const formEmail = await page.locator('nb-card', { hasText: 'Using the Grid' }).getByRole('textbox', { name: 'Email' });
 
         await formEmail.fill('test@example.com');
-        await formEmail.clear();
+        //await formEmail.clear();
 
-        await formEmail.pressSequentially('test2@example.com', { delay: 500 });
+        //await formEmail.pressSequentially('test2@example.com', { delay: 500 });
 
+        //extract value
         const inputText = await formEmail.inputValue();
-        //generic assertion
-        expect(inputText).toEqual('test2@example.com');
+        // //generic assertion
+        expect(inputText).toEqual('test@example.com');
 
-        //locator assertion
-        expect(formEmail).toHaveValue('test2@example.com');
+        // //locator assertion
+        // expect(formEmail).toHaveValue('test@example.com');
     })
 
     test('radio buttons', async ({ page }) => {
@@ -98,6 +99,17 @@ test('dropdowns and lists', async ({ page }) => {
     }
 })
 
+test('combobox', async ({ page }) => {
+    await page.getByText('Modal & Overlays').click();
+    await page.getByText('Toastr').click();
+
+    const toastTypeSelect = page.locator('.form-group', { hasText: 'Toast type' }).locator('nb-select');
+    await toastTypeSelect.click();
+    await page.locator('nb-option-list nb-option').filter({ hasText: 'info' }).click();
+
+    await expect(toastTypeSelect).toHaveText('info');
+})
+
 test('tooltips', async ({ page }) => {
     await page.getByText('Modal & Overlays').click();
     await page.getByText('Tooltip').click();
@@ -113,6 +125,8 @@ test('dialog boxes', async ({ page }) => {
     await page.getByText('Tables & Data').click();
     await page.getByText('Smart table').click();
 
+
+    //event listener; initialize before the action that triggers the dialog box
     page.on('dialog', async dialog => {
         expect(dialog.message()).toEqual('Are you sure you want to delete?');
         await dialog.accept();

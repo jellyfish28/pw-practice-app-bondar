@@ -43,7 +43,7 @@ test('locating child elements', async ({ page }) => {
     await page.locator('nb-card').locator('nb-radio').locator(':text-is("Option 2")').click();
 
     await page.locator('nb-card').getByRole('button', { name: 'Sign in' }).first().click;
-    await page.locator('nb-card').nth(3).getByRole('button').click();
+    await page.locator('nb-card').nth(3).getByRole('button').click();//we choose 3rd nb-card
 });
 
 test('locating parent elements', async ({ page }) => {
@@ -52,7 +52,7 @@ test('locating parent elements', async ({ page }) => {
     await page.locator('nb-card').filter({ hasText: 'Basic form' }).getByRole('textbox', { name: 'Email' }).click();
     await page.locator('nb-card').filter({ has: page.locator('.status-danger') }).getByRole('textbox', { name: 'Password' }).click();
     await page.locator('nb-card').filter({ has: page.locator('[type="checkbox"]') }).filter({ hasText: 'Sign in' }).getByRole('textbox', { name: 'Email' }).click();
-    await page.locator(':text-is("Using the Grid")').locator('..').getByRole('textbox', { name: 'Email' }).click();
+    await page.locator(':text-is("Using the Grid")').locator('..').getByRole('textbox', { name: 'Email' }).click();//locator('..')will go up one level in the DOM tree, to the parent element of the current locator
 });
 
 test('reuse elements', async ({ page }) => {
@@ -74,7 +74,7 @@ test('take value from element', async ({ page }) => {
 
     expect(buttonText).toEqual('Submit');
 
-    //all values
+    //all values from a locator
     const allRadioButtons = await page.locator('nb-card').filter({ hasText: 'Using the Grid' }).locator('nb-radio').allTextContents();
     expect(allRadioButtons).toContain('Option 1');
 

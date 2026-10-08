@@ -16,9 +16,14 @@ pull image from PW site
   docker pull mcr.microsoft.com/playwright:v1.61.0-noble
 
   FROM mcr.microsoft.com/playwright:v1.61.0-noble - Dockerfile
-  keep in mind: version of image should be the same as PW version in package.json
+  keep in mind: version of image should be the same as PW version in package.json ("@playwright/test": "^1.61.0")
 
-  FROM mcr.microsoft.com/playwright:v1.61.0-noble
+  FROM mcr.microsoft.com/playwright:v1.61.0-noble - sets the base image for your Docker image:
+
+  mcr.microsoft.com is Microsoft’s container registry.
+playwright is the official Playwright image.
+v1.61.0 is the Playwright image version.
+noble means it uses Ubuntu 24.04 (“Noble Numbat”).
 
 RUN mkdir /app - will create folder in container
 WORKDIR /app - it will be working dir
@@ -29,13 +34,19 @@ RUN npx playwright install
 
   to run test in DOcker
   in Terminal in IDE run
-  docker build -t pw-pageobject-test . -->docker image will be created
+  docker build -t pw-pageobject-test . -->docker image will be created; -t means tag; . - means use current dir as the build context
 
-  check images
-  docker images
+  check images (or check them in Docker desktop->Images)
+  docker images 
 
   run docker image
-  docker run -it pw-pageobject-test
+  docker run -it pw-pageobject-test -->
+  docker run -it pw-pageobject-test creates and starts a container from the pw-pageobject-test image.
+
+docker run starts a new container.
+-i keeps input open, and -t gives you an interactive terminal.
+pw-pageobject-test is the image name you built earlier.
+In your setup, it should open a shell in the container. From there, run npm run firstTest-chromium to start the tests. 
 
   then you are in container
   npm run firstTest-chromium -->will run test in container
@@ -57,7 +68,9 @@ RUN npx playwright install
 
 
 //run docker-compose
-docker-compose up --build    
+docker-compose up --build 
+OR
+docker compose up --build --abort-on-container-exit --exit-code-from playwright-test   
 
 //to exit container in IDE in Terminal run: exit command
 
@@ -65,8 +78,11 @@ docker-compose up --build
 instruction to setup remote repo
 
 https://bondaracademy.com/blog/most-poular-git-commands-for-testers
+3.0 upload your project to GitHub
 
 3.1 git remote set-url origin https://github.com/jellyfish28/pw-practice-app-bondar.git - create new repo on GitHub and set it as main one
+
+go to https://playwright.dev/docs/ci-intro and copy playwright.yml to your project
 
 3.2 git remote -v -- check that main repo is selected
 
@@ -84,3 +100,7 @@ also setup your user in git
 
 git config --global user.name "<your-full-name>"
 git config --global user.email "<your-email-address>"
+
+
+each push will trigger test run on GitHub
+and report will be attached

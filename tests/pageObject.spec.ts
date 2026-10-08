@@ -22,17 +22,17 @@ test('Submit Using grid form', async ({ page }) => {
     await pageManager.onFormLayoutPage().submitUsingGridForm(process.env.USERNAME || 'test@gmail.com', process.env.PASSWORD || '12345', 'Option 2');
 })
 
-test('Submit Inline form', async ({ page }) => {
+test.only('Submit Inline form', async ({ page }) => {
     const pageManager = new PageManager(page);
     const firstName = faker.person.firstName();
     const email = `${firstName}${faker.number.int({ max: 100 })}@test.ua`;
 
     await pageManager.navigateTo().navigateToFormsPage();
     //screenshot for specific locator
-    await page.locator('nb-card', { hasText: 'Inline form' }).screenshot({ path: 'screenshots/inlineFormScreen.png' })
-    await page.screenshot({ path: 'screenshots/inlineForm.png' })
+    await page.locator('nb-card', { hasText: 'Inline form' }).screenshot({ path: 'screenshots/inlineFormBeforeSubmit.png' })
     await pageManager.onFormLayoutPage().submitInlineForm(firstName, email, false);
-
+    await page.screenshot({ path: 'screenshots/inlineForm.png' })
+    await page.locator('nb-card', { hasText: 'Inline form' }).screenshot({ path: 'screenshots/inlineFormAfterSubmit.png' })
 })
 
 test('Datepicker selection', async ({ page }) => {

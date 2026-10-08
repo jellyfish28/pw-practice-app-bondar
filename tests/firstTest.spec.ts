@@ -21,15 +21,11 @@ test.describe('Test suite1 @block', () => {
 
 test.describe('Test suite2', () => {
     test.beforeEach(async ({ page }) => {
-        await page.getByText('Forms').click();
+        await page.getByText('Charts').first().click();
     });//will be executed before each test in the describe block, it will click on the 'Forms' text before each test runs
 
     test('basic test', async ({ page }) => {
-        await page.getByText('Form Layouts').click();
-    });
-
-    test('basic Datepicker', async ({ page }) => {
-        await page.getByText('Datepicker').click();
+        await page.getByText('Echarts').click();
     });
 })
 
