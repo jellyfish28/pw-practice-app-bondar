@@ -10,13 +10,13 @@ test('Basic form submit', async ({ page }) => {
     const passwordInput = basicForm.getByRole('textbox', { name: 'Password' });
     const submitButton = basicForm.getByRole('button', { name: 'Submit' });
 
-    await emailInput.fill(process.env.USERNAME!);
-    await passwordInput.fill(process.env.PASSWORD!);
+    await emailInput.fill(process.env.USER_EMAIL!);
+    await passwordInput.fill(process.env.USER_PASSWORD!);
     await basicForm.locator('nb-checkbox').click();
     await expect(submitButton).toBeEnabled();
     await submitButton.click();
 
-    await expect(emailInput).toHaveValue(process.env.USERNAME!);
+    await expect(emailInput).toHaveValue(process.env.USER_EMAIL!);
 });
 
 test('Form without labels', async ({ page }) => {

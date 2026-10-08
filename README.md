@@ -108,3 +108,11 @@ git config --global user.email "<your-email-address>"
 
 each push will trigger test run on GitHub
 and report will be attached
+
+- git workflow
+
+Checks out the repository and installs the latest Node.js LTS.
+Runs npm ci --force to install dependencies from the lockfile.
+Installs Playwright browsers and their system dependencies.
+Runs npm run firstTest-chromium. That script runs all three tests in basicFormSubmit.spec.ts, using Chromium only.
+Uploads playwright-report as an artifact for 30 days. The !cancelled() condition means it can still upload the report after a test failure, but not after cancellation.

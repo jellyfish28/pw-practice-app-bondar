@@ -38,7 +38,7 @@ export default defineConfig<TestOptions>({
   use: {
     /* Base URL to use in actions like `await page.goto('')`. */
     //baseURL: 'http://localhost:4200/',
-    baseURL: process.env.URL,
+    baseURL: process.env.BASE_URL,
     globalQaURL: 'https://www.globalsqa.com/demo-site/draganddrop/',
     actionTimeout: 4000,//maximum time for each action to complete, e.g. click(), fill(), etc.
 
