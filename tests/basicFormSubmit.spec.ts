@@ -30,9 +30,9 @@ test('Form without labels', async ({ page }) => {
     const messageInput = basicForm.getByPlaceholder('Message');
     const submitButton = basicForm.getByRole('button', { name: 'Send' });
 
-    await emailInput.fill(process.env.USERNAME!);
-    await expect(emailInput).toHaveValue(process.env.USERNAME!);
-    await passwordInput.fill(process.env.PASSWORD!);
+    await emailInput.fill(process.env.USER_EMAIL!);
+    await expect(emailInput).toHaveValue(process.env.USER_EMAIL!);
+    await passwordInput.fill(process.env.USER_PASSWORD!);
     await messageInput.fill('Test message');
     await expect(submitButton).toBeEnabled();
     await submitButton.click();
@@ -49,12 +49,12 @@ test('Horizontal form submission', async ({ page }) => {
     const rememberMeCheckbox = horizontalForm.locator('nb-checkbox');
     const signInButton = horizontalForm.getByRole('button', { name: 'Sign in' });
 
-    await emailInput.fill(process.env.USERNAME!);
-    await passwordInput.fill(process.env.PASSWORD!);
+    await emailInput.fill(process.env.USER_EMAIL!);
+    await passwordInput.fill(process.env.USER_PASSWORD!);
     await rememberMeCheckbox.click();
 
-    await expect(emailInput).toHaveValue(process.env.USERNAME!);
-    await expect(passwordInput).toHaveValue(process.env.PASSWORD!);
+    await expect(emailInput).toHaveValue(process.env.USER_EMAIL!);
+    await expect(passwordInput).toHaveValue(process.env.USER_PASSWORD!);
     await expect(rememberMeCheckbox).toContainText('Remember me');
     await expect(signInButton).toBeEnabled();
     await signInButton.click();

@@ -50,10 +50,16 @@ export default defineConfig<TestOptions>({
       mode: 'on',
       size: { width: 1920, height: 1080 }
     }
+  }, webServer: {
+    command: "npm start",
+    url: process.env.BASE_URL,
+    reuseExistingServer: !process.env.CI,
+    timeout: 120_000,
   },
 
   /* Configure projects for major browsers */
   projects: [
+
     {
       name: 'dev',
       use: {
